@@ -1,0 +1,19 @@
+name: Enviar promoções automáticas
+
+on:
+  schedule:
+    - cron: "0 * * * *"  # 1 vez por hora (ajuste como quiser)
+  workflow_dispatch: {}   # permite rodar manualmente
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enviar promoção
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GROUP_CHAT_ID: "-100XXXXXXXXXX"  # ID do grupo Afiliado.top
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            -d chat_id="${GROUP_CHAT_ID}" \
+            -d text="🔥 Promoção automática do Afiliado.Top"
