@@ -12,7 +12,7 @@ jobs:
       - name: Enviar promoção
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          GROUP_CHAT_ID: "-100XXXXXXXXXX"  # ID do grupo Afiliado.top
+          GROUP_CHAT_ID: "-1002499912192"  # ID do grupo Afiliado.top
         run: |
           curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
             -d chat_id="${GROUP_CHAT_ID}" \
