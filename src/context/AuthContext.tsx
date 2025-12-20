@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { api } from "../services/api";
 
 interface User {
-    id: number;
+    id: string | number;
     name: string;
     email: string;
     role: string;
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             if (res && res.access_token) {
                 const userData = res.user;
                 const userObj: User = {
-                    id: 1,
+                    id: userData.id,
                     name: userData.name,
                     email: userData.email,
                     role: userData.role

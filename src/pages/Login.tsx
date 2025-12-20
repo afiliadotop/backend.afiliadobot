@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Bot, Loader2, Lock, Mail } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { PageTransition } from "../components/layout/PageTransition";
@@ -80,10 +80,15 @@ export const Login = () => {
                         </button>
                     </form>
 
-                    <div className="mt-8 pt-6 border-t border-slate-800 text-center">
+                    <div className="mt-8 pt-6 border-t border-slate-800 text-center space-y-4">
+                        <p className="text-sm text-slate-400">
+                            Não tem uma conta?{" "}
+                            <Link to="/register" className="text-indigo-400 hover:underline">
+                                Criar Conta
+                            </Link>
+                        </p>
                         <p className="text-xs text-slate-500">
-                            Acesso restrito para administradores.<br />
-                            Use <span className="text-indigo-400">admin@afiliado.top</span> / <span className="text-indigo-400">admin</span>
+                            Acesso administrativo: <span className="text-indigo-400">admin@afiliado.top</span>
                         </p>
                     </div>
                 </div>

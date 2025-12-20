@@ -4,6 +4,9 @@ import { AuthProvider } from "./context/AuthContext";
 import { PrivateRoute } from "./components/layout/PrivateRoute";
 import { LandingPage } from "./pages/LandingPage";
 import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+import { AdminRoute } from "./components/layout/AdminRoute";
+import { ClientDashboard } from "./components/client/ClientDashboard";
 import { DashboardLayout } from "./components/layout/DashboardLayout";
 import { Overview } from "./components/dashboard/Overview";
 import { Products } from "./components/dashboard/Products";
@@ -24,8 +27,15 @@ function App() {
                     <Routes>
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
 
-                        <Route path="/dashboard" element={<PrivateRoute />}>
+                        {/* Client Route */}
+                        <Route path="/client" element={<PrivateRoute />}>
+                            <Route index element={<ClientDashboard />} />
+                        </Route>
+
+                        {/* Admin Route */}
+                        <Route path="/dashboard" element={<AdminRoute />}>
                             <Route element={<DashboardLayout />}>
                                 <Route index element={<Navigate to="/dashboard/overview" replace />} />
                                 <Route path="overview" element={<Overview />} />

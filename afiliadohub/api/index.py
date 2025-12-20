@@ -196,6 +196,10 @@ async def import_csv(
 
 # ==================== WEBHOOK & AUTOMAÇÃO TELEGRAM ====================
 
+# Import Auth Router
+from api.handlers.auth import router as auth_router
+app.include_router(auth_router, prefix="/api")
+
 @app.post("/api/telegram/webhook")
 async def telegram_webhook(request: Request):
     """Recebe atualizações do Telegram (Mensagens dos usuários)"""
@@ -245,17 +249,7 @@ async def stats_endpoint():
     from api.handlers.analytics import get_system_statistics
     return await get_system_statistics()
 
-@app.post("/api/auth/login")
-async def login(data: dict):
-    from api.services.auth_service import auth_service
-    email = data.get("email")
-    password = data.get("password")
-    
-    result = auth_service.login(email, password)
-    if not result:
-        raise HTTPException(status_code=401, detail="Credenciais inválidas")
-    
-    return result
+
 
 @app.get("/api/stats/dashboard")
 async def stats_dashboard_endpoint():
