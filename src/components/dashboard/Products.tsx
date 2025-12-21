@@ -164,15 +164,15 @@ export const Products = () => {
                                                 <div className="flex gap-2 justify-end">
                                                     <button
                                                         onClick={() => handleOpenModal(p)}
-                                                        className="text-slate-400 hover:text-indigo-500 transition-colors p-2"
-                                                        title="Editar"
+                                                        className="text-indigo-600 hover:text-indigo-500 transition-colors"
+                                                        aria-label={`Editar produto ${p?.name || 'sem nome'}`}
                                                     >
                                                         <Edit size={16} />
                                                     </button>
                                                     <button
-                                                        className="text-slate-400 hover:text-red-500 transition-colors p-2"
                                                         onClick={() => handleDelete(p.id, p.name)}
-                                                        title="Deletar"
+                                                        className="text-red-600 hover:text-red-500 transition-colors"
+                                                        aria-label={`Deletar produto ${p?.name || 'sem nome'}`}
                                                     >
                                                         <Trash2 size={16} />
                                                     </button>
