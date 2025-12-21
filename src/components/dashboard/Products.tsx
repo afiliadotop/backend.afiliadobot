@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Search, Plus, Filter, Trash2, Edit } from "lucide-react";
+import { Search, Plus, Filter, Trash2, Edit, Package } from "lucide-react";
 import { Skeleton } from "../ui/Skeleton";
 import { PageTransition } from "../layout/PageTransition";
 import { useProducts, Product } from "../../hooks/useProducts";
 import { ProductModal } from "./ProductModal";
+import { EmptyState } from "../ui/EmptyState";
 
 export const Products = () => {
     const { products, loading, createProduct, updateProduct, deleteProduct } = useProducts();
@@ -110,9 +111,17 @@ export const Products = () => {
                                 ))}
                             </div>
                         ) : filteredProducts.length === 0 ? (
-                            <div className="text-center py-20">
-                                <p className="text-slate-500">Nenhum produto encontrado</p>
-                            </div>
+                            <EmptyState
+                                icon={Package}
+                                title="Nenhum produto encontrado"
+                                description={searchTerm || storeFilter || categoryFilter
+                                    ? "Tente ajustar seus filtros de busca para encontrar produtos."
+                                    : "Comece adicionando produtos manualmente ou importando via CSV."}
+                                action={!searchTerm && !storeFilter && !categoryFilter ? {
+                                    label: "Adicionar Primeiro Produto",
+                                    onClick: () => handleOpenModal()
+                                } : undefined}
+                            />
                         ) : (
                             <table className="w-full text-left text-sm">
                                 <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
@@ -140,7 +149,7 @@ export const Products = () => {
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4 text-slate-600 dark:text-slate-400">{p.category || '-'}</td>
-                                            <td className="px-6 py-4 font-mono">R$ {p.current_price.toFixed(2)}</td>
+                                            <td className="px-6 py-4 font-mono">R$ {(p.current_price || 0).toFixed(2)}</td>
                                             <td className="px-6 py-4">
                                                 {(p.discount_percentage || 0) > 0 ? (
                                                     <span className="text-green-600 font-bold bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full text-xs">

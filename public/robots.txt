@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard/
+Disallow: /client/
+Disallow: /api/
+
+Sitemap: https://afiliado.top/sitemap.xml

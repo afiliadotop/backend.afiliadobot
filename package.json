@@ -7,7 +7,7 @@
     "dev": "vite",
     "dev:all": "concurrently \"npm run backend\" \"npm run frontend\"",
     "frontend": "vite",
-    "backend": "uvicorn api.index:app --reload --port 8000",
+    "backend": ".\\venv\\Scripts\\uvicorn afiliadohub.api.index:app --reload --port 8000",
     "build": "vite build",
     "preview": "vite preview"
   },
