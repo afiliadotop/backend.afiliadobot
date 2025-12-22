@@ -6,8 +6,8 @@ from typing import Dict, List, Any, Optional
 from datetime import datetime
 import pandas as pd
 
-from api.utils.supabase_client import get_supabase_manager
-from api.utils.link_processor import normalize_link, detect_store, extract_product_info
+from ..utils.supabase_client import get_supabase_manager
+from ..utils.link_processor import normalize_link, detect_store, extract_product_info
 
 logger = logging.getLogger(__name__)
 

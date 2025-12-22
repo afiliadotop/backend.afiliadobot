@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 from decimal import Decimal
 
-from api.utils.supabase_client import get_supabase_manager
+from ..utils.supabase_client import get_supabase_manager
 
 class CommissionSystem:
     def __init__(self):

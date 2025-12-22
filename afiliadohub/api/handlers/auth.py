@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, EmailStr, Field
-from api.utils.supabase_client import get_supabase_manager
+from ..utils.supabase_client import get_supabase_manager
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 

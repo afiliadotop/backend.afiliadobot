@@ -57,7 +57,7 @@ async def lifespan(app: FastAPI):
 
     # Inicializa Bot Telegram
     if BOT_TOKEN:
-        from api.handlers.telegram import setup_telegram_handlers
+        from .handlers.telegram import setup_telegram_handlers
         global telegram_app
         telegram_app = await setup_telegram_handlers(BOT_TOKEN)
         
@@ -157,7 +157,7 @@ async def health_check():
 
 @app.post("/api/products", dependencies=[Depends(verify_admin_token)])
 async def create_product(product: ProductCreate):
-    from api.handlers.products import add_product
+    from .handlers.products import add_product
     result = await add_product(product.dict())
     if not result.get("success"):
         raise HTTPException(status_code=400, detail=result.get("error"))
@@ -169,7 +169,7 @@ async def get_products(
     limit: int = 50,
     min_discount: int = 0
 ):
-    from api.handlers.products import search_products
+    from .handlers.products import search_products
     filters = {"store": store, "limit": limit, "min_discount": min_discount}
     return await search_products(filters)
 
@@ -181,7 +181,7 @@ async def import_csv(
     store: str = "shopee",
     background_tasks: BackgroundTasks = BackgroundTasks()
 ):
-    from api.handlers.csv_import import process_csv_upload
+    from .handlers.csv_import import process_csv_upload
     
     if not file.filename.endswith('.csv'):
         raise HTTPException(status_code=400, detail="Apenas CSV permitido")
@@ -197,8 +197,8 @@ async def import_csv(
 # ==================== WEBHOOK & AUTOMAÇÃO TELEGRAM ====================
 
 # Import Auth Router
-from api.handlers.auth import router as auth_router
-from api.handlers.products import router as products_router
+from .handlers.auth import router as auth_router
+from .handlers.products import router as products_router
 app.include_router(auth_router, prefix="/api")
 app.include_router(products_router, prefix="/api")
 
@@ -218,7 +218,7 @@ async def telegram_webhook(request: Request):
 @app.post("/api/telegram/send", dependencies=[Depends(verify_cron_token)])
 async def send_cron_message(payload: TelegramMessage):
     """Endpoint chamado pelo GitHub Actions para enviar promoções"""
-    from api.handlers.telegram import TelegramBot
+    from .handlers.telegram import TelegramBot
     
     try:
         # Se o payload vier com product_id, busca o produto
@@ -248,7 +248,7 @@ async def send_cron_message(payload: TelegramMessage):
 
 @app.get("/api/stats")
 async def stats_endpoint():
-    from api.handlers.analytics import get_system_statistics
+    from .handlers.analytics import get_system_statistics
     return await get_system_statistics()
 
 
@@ -256,7 +256,7 @@ async def stats_endpoint():
 @app.get("/api/stats/dashboard")
 async def stats_dashboard_endpoint():
     """Alias for /api/stats - used by frontend dashboard"""
-    from api.handlers.analytics import get_system_statistics
+    from .handlers.analytics import get_system_statistics
     return await get_system_statistics()
 
 @app.post("/api/commission/calculate", dependencies=[Depends(verify_admin_token)])

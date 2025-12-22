@@ -14,8 +14,8 @@ from telegram.ext import (
     ContextTypes
 )
 
-from api.utils.supabase_client import get_supabase_manager
-from api.utils.link_processor import normalize_link, detect_store
+from ..utils.supabase_client import get_supabase_manager
+from ..utils.link_processor import normalize_link, detect_store
 
 logger = logging.getLogger(__name__)
 
