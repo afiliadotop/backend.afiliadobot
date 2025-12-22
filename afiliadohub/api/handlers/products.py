@@ -2,7 +2,10 @@ from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime
-from ..config import supabase
+from ..utils.supabase_client import get_supabase_manager
+
+# Get supabase instance
+supabase = get_supabase_manager().client
 
 router = APIRouter()
 
