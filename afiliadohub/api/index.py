@@ -48,7 +48,7 @@ security = HTTPBearer()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # 1. Startup
-    logger.info("🚀 Iniciando AfiliadoHub API...")
+    logger.info("[STARTUP] Iniciando AfiliadoHub API...")
     
     # Inicia Scheduler (apenas se não estiver em ambiente serverless como Vercel)
     # Se estiver no Vercel, o GitHub Actions (cron.yml) fará o trabalho.

@@ -75,7 +75,7 @@ class Scheduler:
             "cron_expression": cron_expression
         }
         
-        logger.info(f"✅ Tarefa {task_id} agendada")
+        logger.info(f"[OK] Tarefa {task_id} agendada")
         
         # Inicia a execução em background
         asyncio.create_task(self._run_task(task_id))
@@ -140,10 +140,10 @@ class Scheduler:
             else:
                 task["func"]()
             
-            logger.info(f"✅ Tarefa {task_id} concluída")
+            logger.info(f"[OK] Tarefa {task_id} concluída")
             
         except Exception as e:
-            logger.error(f"❌ Erro na execução da tarefa {task_id}: {e}")
+            logger.error(f"[ERRO] Erro na execução da tarefa {task_id}: {e}")
     
     async def check_prices(self):
         """Verifica e atualiza preços dos produtos"""
@@ -179,7 +179,7 @@ class Scheduler:
                     .eq("id", product["id"])\
                     .execute()
             
-            logger.info(f"✅ Verificação de preços concluída")
+            logger.info(f"[OK] Verificação de preços concluída")
             
         except Exception as e:
             logger.error(f"Erro na verificação de preços: {e}")
@@ -215,7 +215,7 @@ class Scheduler:
             
             # Aqui você implementaria a lógica de backup
             # Por enquanto, apenas registra no log
-            logger.info("✅ Backup concluído (simulado)")
+            logger.info("[OK] Backup concluído (simulado)")
             
         except Exception as e:
             logger.error(f"Erro ao criar backup: {e}")

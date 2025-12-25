@@ -71,7 +71,7 @@ class SupabaseManager:
                 raise Exception("Nenhum dado retornado ao inserir produto")
                 
         except Exception as e:
-            print(f"❌ Erro ao inserir produto: {e}")
+            print(f"[ERRO] Erro ao inserir produto: {e}")
             raise
     
     async def bulk_insert_products(self, products: List[Dict[str, Any]], batch_size: int = 1000) -> Dict[str, Any]:
@@ -107,7 +107,7 @@ class SupabaseManager:
             except Exception as e:
                 results["errors"] += len(batch)
                 results["error_messages"].append(str(e))
-                print(f"❌ Erro no batch {i//batch_size + 1}: {e}")
+                print(f"[ERRO] Erro no batch {i//batch_size + 1}: {e}")
         
         return results
     
@@ -145,7 +145,7 @@ class SupabaseManager:
             return response.data
             
         except Exception as e:
-            print(f"❌ Erro ao buscar produtos: {e}")
+            print(f"[ERRO] Erro ao buscar produtos: {e}")
             return []
     
     async def get_random_product(self, store: Optional[str] = None, min_discount: int = 0) -> Optional[Dict[str, Any]]:
@@ -170,7 +170,7 @@ class SupabaseManager:
             return response.data[0] if response.data else None
             
         except Exception as e:
-            print(f"❌ Erro ao buscar produto aleatório: {e}")
+            print(f"[ERRO] Erro ao buscar produto aleatório: {e}")
             return None
     
     async def update_product_price(self, product_id: int, new_price: float) -> bool:
@@ -185,7 +185,7 @@ class SupabaseManager:
             return len(response.data) > 0
             
         except Exception as e:
-            print(f"❌ Erro ao atualizar preço: {e}")
+            print(f"[ERRO] Erro ao atualizar preço: {e}")
             return False
     
     # ==================== MÉTODOS PARA ESTATÍSTICAS ====================
@@ -205,7 +205,7 @@ class SupabaseManager:
             
             return True
         except Exception as e:
-            print(f"❌ Erro ao incrementar estatística: {e}")
+            print(f"[ERRO] Erro ao incrementar estatística: {e}")
             return False
     
     async def get_daily_stats(self, date: datetime) -> Dict[str, Any]:
@@ -228,7 +228,7 @@ class SupabaseManager:
                 }
                 
         except Exception as e:
-            print(f"❌ Erro ao buscar estatísticas diárias: {e}")
+            print(f"[ERRO] Erro ao buscar estatísticas diárias: {e}")
             return {}
     
     # ==================== MÉTODOS UTILITÁRIOS ====================
@@ -249,7 +249,7 @@ class SupabaseManager:
             return deleted_count
             
         except Exception as e:
-            print(f"❌ Erro ao limpar produtos antigos: {e}")
+            print(f"[ERRO] Erro ao limpar produtos antigos: {e}")
             return 0
     
     async def get_system_summary(self) -> Dict[str, Any]:
@@ -283,7 +283,7 @@ class SupabaseManager:
             }
             
         except Exception as e:
-            print(f"❌ Erro ao buscar resumo: {e}")
+            print(f"[ERRO] Erro ao buscar resumo: {e}")
             return {}
 
 # Singleton para acesso global

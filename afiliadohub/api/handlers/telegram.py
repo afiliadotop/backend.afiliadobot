@@ -49,11 +49,11 @@ class TelegramBot:
             # await self.application.start()
             # await self.application.updater.start_polling()
             
-            logger.info("✅ Bot Telegram inicializado")
+            logger.info("[OK] Bot Telegram inicializado")
             return self.application
             
         except Exception as e:
-            logger.error(f"❌ Erro ao inicializar bot Telegram: {e}")
+            logger.error(f"[ERRO] Erro ao inicializar bot Telegram: {e}")
             raise
     
     def _register_handlers(self):
@@ -565,11 +565,11 @@ Ex: /buscar eletrônicos
                 "telegram_send_count"
             )
             
-            logger.info(f"✅ Produto {product['id']} enviado para {chat_id}")
+            logger.info(f"[OK] Produto {product['id']} enviado para {chat_id}")
             return True
             
         except Exception as e:
-            logger.error(f"❌ Erro ao enviar produto para canal: {e}")
+            logger.error(f"[ERRO] Erro ao enviar produto para canal: {e}")
             return False
 
 # Função para inicializar o bot

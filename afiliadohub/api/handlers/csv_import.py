@@ -64,10 +64,10 @@ class CSVImporter:
                         total_processed += len(chunk_products)
                         
                         # Log de progresso a cada chunk
-                        logger.info(f"✅ Chunk {chunk_idx+1} processado. Total até agora: {self.import_stats['imported']} importados.")
+                        logger.info(f"[OK] Chunk {chunk_idx+1} processado. Total até agora: {self.import_stats['imported']} importados.")
                         
                     except Exception as e:
-                        logger.error(f"❌ Erro ao inserir chunk {chunk_idx+1}: {e}")
+                        logger.error(f"[ERRO] Erro ao inserir chunk {chunk_idx+1}: {e}")
                         self.import_stats['errors'] += len(chunk_products)
                 else:
                     logger.warning(f"⚠️ Chunk {chunk_idx+1} vazio (nenhum produto válido).")
@@ -76,7 +76,7 @@ class CSVImporter:
             return self.import_stats
                 
         except Exception as e:
-            logger.error(f"❌ Erro ao processar CSV: {e}")
+            logger.error(f"[ERRO] Erro ao processar CSV: {e}")
             raise
     
     def _parse_csv_row(self, row: pd.Series, default_store: str) -> Optional[Dict[str, Any]]:
@@ -209,7 +209,7 @@ async def process_csv_upload(file_content, store: str, replace_existing: bool = 
         return stats
         
     except Exception as e:
-        logger.error(f"❌ Falha na importação: {e}")
+        logger.error(f"[ERRO] Falha na importação: {e}")
         raise
 
 # Função para importação da Shopee diária
@@ -234,9 +234,9 @@ async def import_shopee_daily_csv(url: str):
             replace_existing=False
         )
         
-        logger.info(f"✅ CSV Shopee importado: {stats}")
+        logger.info(f"[OK] CSV Shopee importado: {stats}")
         return stats
         
     except Exception as e:
-        logger.error(f"❌ Erro ao importar CSV Shopee: {e}")
+        logger.error(f"[ERRO] Erro ao importar CSV Shopee: {e}")
         return None
