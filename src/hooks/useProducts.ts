@@ -49,7 +49,12 @@ export const useProducts = () => {
             const response = await api.get<{ data: Product[], count: number }>(`/products?${params.toString()}`);
 
             if (response) {
-                setProducts(response.data);
+                // Handle both legacy (Array) and new (Object with data) formats
+                if (Array.isArray(response)) {
+                    setProducts(response);
+                } else if (response.data) {
+                    setProducts(response.data);
+                }
             }
         } catch (error) {
             console.error('Failed to fetch products:', error);
